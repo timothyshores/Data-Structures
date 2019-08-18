@@ -64,6 +64,7 @@ Stretch Goals:
 ![Image of a Heap in Array form](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Heap-as-array.svg/603px-Heap-as-array.svg.png)
 
 ## Stretch Goals
+---
 
 ### Generic Heaps
 A max heap is pretty useful, but what's even more useful is to have our heap be generic such that the user can define their own priority function and pass it to the heap to use.
