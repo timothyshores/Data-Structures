@@ -46,10 +46,12 @@ class TextBuffer:
 
     def join(self, buffer):
         self.contents.tail.next = buffer.contents.head
-        buffer.contents.head.pre = self.contents.tail
+        buffer.contents.head.prev = self.contents.tail
         self.contents.tail = buffer.contents.tail
 
 
 text_buffer1 = TextBuffer("Hello")
-text_buffer1.delete_back(2)
+text_buffer2 = TextBuffer(" World")
+text_buffer1.join(text_buffer2)
+
 print(text_buffer1)

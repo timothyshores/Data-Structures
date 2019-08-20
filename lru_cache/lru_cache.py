@@ -4,7 +4,11 @@ class LRUCache:
     # Need to store cache
     # Need to store cache size
     def __init__(self, limit=10):
-        pass
+        self.contents = []
+        self.limit = limit
+
+    def __repr__(self):
+        return f"self.contents: {self.contents}"
 
     """
   Retrieves the value associated with the given key. Also
@@ -14,8 +18,8 @@ class LRUCache:
   key-value pair doesn't exist in the cache. 
   """
 
-    def get(self, key):
-        pass
+    def get(self, key=None):
+        return self.contents
 
     """
   Adds the given key-value pair to the cache. The newly-
@@ -29,4 +33,14 @@ class LRUCache:
   """
 
     def set(self, key, value):
-        pass
+
+        if (len(self.contents) >= self.limit):
+            del self.contents[-1]
+        self.contents = [{key, value}] + self.contents
+
+
+l1 = LRUCache(2)
+l1.set("some key 1", "some value 1")
+l1.set("some key 2", "some value 2")
+l1.set("some key 3", "some value 3")
+print(repr(l1))
