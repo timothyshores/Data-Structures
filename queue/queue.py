@@ -18,7 +18,6 @@ class Queue:
             self.size -= 1
         else:
             return None
-
         return self.storage.remove_from_head()
 
     # accessor or getter

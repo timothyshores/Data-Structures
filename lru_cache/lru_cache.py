@@ -4,7 +4,7 @@ class LRUCache:
     # Need to store cache
     # Need to store cache size
     def __init__(self, limit=10):
-        self.contents = []
+        self.cache = DoublyLinkedList()
         self.limit = limit
 
     def __repr__(self):
@@ -19,7 +19,7 @@ class LRUCache:
   """
 
     def get(self, key=None):
-        return self.contents
+        return self.cache
 
     """
   Adds the given key-value pair to the cache. The newly-
@@ -33,14 +33,13 @@ class LRUCache:
   """
 
     def set(self, key, value):
+        self.cache.add_to_head({key, value})
+        # self.contents = [{key, value}] + self.contents
 
-        if (len(self.contents) >= self.limit):
-            del self.contents[-1]
-        self.contents = [{key, value}] + self.contents
+        # if (len(self.contents) >= self.limit):
+        #     del self.contents[-1]
 
 
-l1 = LRUCache(2)
+l1 = LRUCache()
 l1.set("some key 1", "some value 1")
-l1.set("some key 2", "some value 2")
-l1.set("some key 3", "some value 3")
-print(repr(l1))
+print(l1)
