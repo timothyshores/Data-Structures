@@ -7,8 +7,11 @@ class LRUCache:
     # Need to store cache
     # Need to store cache size
     def __init__(self, limit=10):
-        self.cache = DoublyLinkedList()
         self.limit = limit
+        self.size = 0
+        self.storage = dict()
+        self.order = DoublyLinkedList()
+
     """
   Retrieves the value associated with the given key. 
   
@@ -27,15 +30,13 @@ class LRUCache:
         return s
 
     def get(self, key=None):
-        node = self.cache.head.value[0]
-        while node is not key:
-            node = node.next
-        return node
-
-        # if str(list(self.cache.head.value)[0]) == str(key):
-        #     return "Key found"
-        # else:
-        #     return "Key not found"
+        # Case: key is not present
+        if key in self.storage:
+            # Move retrieved item to head
+            node = self.storage[key]
+            self.order.move_to_front(node)
+        # Return value for a given key
+            return node.value[1]
 
     """
   Adds the given key-value pair to the cache. The newly-
@@ -52,14 +53,27 @@ class LRUCache:
   """
 
     def set(self, key, value):
-        if len(self.cache) == self.limit:
+        if key in key.self.cache:
+            node = self.cache[key]
+            node.value = (key, value)
+            self.order.move_to_front()
+            return
+
+        if self.size == self.limit:
+            del self.storage[self.order.tail.value[0]]
             self.cache.remove_from_tail()
+            self.size -= 1
 
-        self.cache.add_to_head({key, value})
+        self.order.add_to_head((key, value))
+        self.storage(key) = self.order.head
+        self.size += 1
 
 
-l1 = LRUCache(2)
-print(l1)
-l1.set("1", "some value 1")
-print(l1)
-print(l1.get(1))
+my_lru = LRUCache(3)
+
+my_lru.set("first", "a")
+my_lru.set("second", "b")
+my_lru.set("third", "c")
+my_lru.set("fourth", "d")
+
+Set a, then b and then c, get a so head should be the head then c and b is the tail.
