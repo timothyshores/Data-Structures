@@ -75,5 +75,3 @@ my_lru.set("first", "a")
 my_lru.set("second", "b")
 my_lru.set("third", "c")
 my_lru.set("fourth", "d")
-
-Set a, then b and then c, get a so head should be the head then c and b is the tail.
