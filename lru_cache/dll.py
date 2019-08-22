@@ -51,6 +51,9 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def head(self):
+        return self.head
+
     def add_to_head(self, value):
         new_node = ListNode(value)
         self.length += 1
@@ -126,7 +129,7 @@ class DoublyLinkedList:
             self.head = self.head.next
             node.delete()
         elif self.tail == node:
-            self.tail = self.node.prev
+            self.tail = self.tail.prev
             node.delete()
         else:
             node.delete()
