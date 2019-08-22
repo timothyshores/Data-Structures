@@ -9,42 +9,86 @@ class BinarySearchTree:
         self.root = None
 
     def insert(self, value):
-        # if there is no root node
-        if self.root is None:
-            # set root node to value
-            self.root.add_to_head(value)
-        # else there is a root node
+        # value is less than root, move left
+        if value < self.value:
+            # if there's no left node
+            if not self.left:
+                # create a new leaf to the left with value
+                self.left = BinarySearchTree(value)
+            # else there is a left node
+            else:
+                # compare to self.left.value
+                self.left.insert(value)
         else:
-            # if node value is greater than root value
-            if self.root.val < node.val:
-                # if right root is None
-                    # assign value to right root
-                # else right root is not None
-                    # call insert method with right root and value
-                # else node value is less than root value
-                # if left root is None
-                    # assign value to left root
-                # else left root is not None
-                    # call insert method with left root and value
-        pass
+            # if there's no right node
+            if not self.right:
+                # create a new leaf to the right with value
+                self.right = BinarySearchTree(value)
+            # else there is a right node
+            else:
+                # compare to self.right.value
+                self.right.insert(value)
 
     def contains(self, target):
-        if self is None or self.val == target:
-            return self
+        # if target is less than node
+        if target < self.value:
+            # left node does not exist
+            if not self.left:
+                return False
+            # left node exists
+            else:
+                # call method with left node
+                return self.left.contains(target)
+        # target is equal to or greater than node
+        else:
+            # right node does not exist
+            if not self.right:
+                return True
+            # right node exists
+            else:
+                # call method with right node
+                return self.right.contains(target)
 
-        # if no root or the root is the target
-            # return root
-
-        # if root is less than target
-            # call contains with right root and target
-
-        # root is greater than target
-        # call contains with left root and target
-
-        pass
-
+    # go right until your find the largest value
     def get_max(self):
-        pass
+        # if BST is empty
+        if not self:
+            return None
+        # if BST is not empty
+        else:
+            # if right node is null
+            if not self.right:
+                # return current value
+                return self.value
+            # else right node exists
+            else:
+                # keep going right
+                return self.get_max()
+
+    def get_max_solution_2(self):
+        # if there's no right node
+        if not self.right:
+            # return current node
+            return self.value
+        # continue moving right until right node is null
+        return self.right.get_max()
 
     def for_each(self, callback):
-        pass
+        # traverse tree
+
+        callback(self.value)
+        if self.left:
+            self.left.for_each(callback)
+        if self.right:
+            self.right.for_each(callback)
+
+    def unorder_print():
+        for_each(print(self.value))
+
+
+bst = BinarySearchTree(5)
+bst.insert(2)
+bst.insert(3)
+bst.insert(7)
+bst.insert(6)
+def cb(x): return print(x)
